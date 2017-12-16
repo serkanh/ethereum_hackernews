@@ -3,44 +3,55 @@ pragma solidity ^0.4.11;
 
 contract Links {
 
-  function bytes32ToString (bytes32 data) returns (string) {
-    bytes memory bytesString = new bytes(32);
-    for (uint j=0; j<32; j++) {
-        byte char = byte(bytes32(uint(data) * 2 ** (8 * j)));
-        if (char != 0) {
-            bytesString[j] = char;
-        }
-    }
-    return string(bytesString);
-}  
+  // Defines a new type with two fields.
+  struct Voter {
+      address addr;
+      int amount; //can be positive or negative vote
+  }
 
   // Create a News struct
   struct Link {
     string title;
     string link;
+    uint numVotes;
+    mapping (uint => Voter) voters;
   }
+
+
   
+   uint numLinks;
 
+   // 
+   mapping (uint => Link) links;
 
-  //mapping
-  mapping(bytes32 => uint8) public votesReceived;
+  // //constructor method name should match the contract
+  // function Links(bytes32[] _linksObject) public {
+  //   linkList = _linksObject;
+  // }
 
-  bytes32[] public linkList;
-
-  //constructor method name should match the contract
-  function Links(bytes32[] linksObject) public {
-    linkList = linksObject;
-  }
-    // for (uint i = 0; i < _linkObjectsData.length; i++) {
-    //         linkList.push(Link(bytes32ToString(_linkObjectsData[i].title),bytes32ToString(_linkObjectsData[i].link)));
-    //     }
-
-  function totalVotesFor(bytes32 _link) returns (uint8) {
-    return votesReceived[_link];
+  function newLink(string _title, string _link) public returns (uint linkID) {
+        linkID = numLinks++; // linkID is return variable
+        // Creates new struct and saves in storage. We leave out the mapping type.
+        links[linkID] = Link(_title, _link, 0);
   }
 
-  function voteForLink(bytes32 _link) {
-    votesReceived[_link] += 1;
+  function vote(uint _linkID) public payable {
+        Link storage l = Link[_linkID];
+        // Creates a new temporary memory struct, initialised with the given values
+        // and copies it over to storage.
+        // Note that you can also use Funder(msg.sender, msg.value) to initialise.
+        l.voters[l.numVotes++] = Voter({addr: msg.sender, amount: msg.value});
+        l.amount += msg.value;
   }
+ 
+
+
+  // function totalVotesFor(bytes32 _link) returns (uint8) {
+  //   return votesReceived[_link];
+  // }
+
+  // function voteForLink(bytes32 _link) {
+  //   votesReceived[_link] += 1;
+  // }
   
 }

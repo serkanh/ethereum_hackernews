@@ -75,18 +75,18 @@ web3.eth.getAccounts()
   .then((result) => {
     deployedContract = result;
     // console.log('deployedContract', deployedContract);
-    return deployedContract.methods.totalVotesFor(asciiToHex('Rama')).call();
+    return deployedContract.methods.totalVotesFor(asciiToHex('1')).call();
   })
-  .then((votesRama) => {
-    console.log('votesRama', votesRama);
-    return deployedContract.methods.voteForCandidate(asciiToHex('Rama')).send();
+  .then((id1) => {
+    console.log('1', id1);
+    return deployedContract.methods.voteForLink(asciiToHex('1')).send();
   })
   .then((voteResult) => {
     // console.log('voteResult', voteResult);
-    return deployedContract.methods.totalVotesFor(asciiToHex('Rama')).call();
+    return deployedContract.methods.totalVotesFor(asciiToHex('1')).call();
   })
-  .then((votesRama) => {
-    console.log('votesRama', votesRama);
+  .then((id1) => {
+    console.log('1', id1);
   })
   .then(() => {
     const server = http.createServer((req, res) => {
