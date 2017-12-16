@@ -1,0 +1,16 @@
+{
+  "name": "ethereum_hackernews",
+  "version": "1.0.0",
+  "description": "news.ycombinator.com clone with ethereum backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "serkan haytac",
+  "license": "ISC",
+  "dependencies": {
+    "ethereumjs-testrpc": "^6.0.3",
+    "solc": "^0.4.19",
+    "web3": "^1.0.0-beta.26"
+  }
+}
