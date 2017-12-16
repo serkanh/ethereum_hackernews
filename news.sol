@@ -25,23 +25,21 @@ contract Links {
   //mapping
   mapping(bytes32 => uint8) public votesReceived;
 
-  //Link[] public linkList;
-  Link[] public linkList;
+  bytes32[] public linkList;
 
   //constructor method name should match the contract
-  function Links(bytes32[] _linksObjects) public {
-    for (uint i = 0; i < _linksObjects.length; i++) {
-            linkList.push(Link(bytes32ToString(_linksObjects[i]['title']),bytes32ToString(_linksObjects[i].link)));
-        }
+  function Links(bytes32[] linksObject) public {
+    linkList = linksObject;
   }
+    // for (uint i = 0; i < _linkObjectsData.length; i++) {
+    //         linkList.push(Link(bytes32ToString(_linkObjectsData[i].title),bytes32ToString(_linkObjectsData[i].link)));
+    //     }
 
   function totalVotesFor(bytes32 _link) returns (uint8) {
-    //if (validCandidate(candidate) == false) throw;
     return votesReceived[_link];
   }
 
-  function voteForCandidate(bytes32 _link) {
-    //if (validCandidate(candidate) == false) throw;
+  function voteForLink(bytes32 _link) {
     votesReceived[_link] += 1;
   }
   

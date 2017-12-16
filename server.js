@@ -14,17 +14,20 @@ const links = [
                 {
                     title: "ethereum rocks!",
                     link: "www.ethereum.com",
-                    votecount: 0
+                    votecount: 0,
+                    id: 1
                 },
                 {
                     title: "ethereum rocks2!",
                     link: "www.google.com",
-                    votecount: 0
+                    votecount: 0,
+                    id: 2
                 },
                 {
                     title: "ethereum rocks3!",
                     link: "news.ycombinator.com",
-                    votecount: 0
+                    votecount: 0,
+                    id: 3
                 }
 ]
 
